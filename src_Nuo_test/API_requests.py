@@ -1,7 +1,17 @@
 import requests
 import json
 
-r = requests.get("https://api.fda.gov/food/enforcement.json?search=report_date:[20040101+TO+20131231]&limit=1", auth=('enforcement', 'report_date'))
+#Get the top 5 manufacturers with recalls
+r = requests.get("https://api.fda.gov/drug/enforcement.json?count=openfda.manufacturer_name.exact&limit=5")
 
-r.headers
-r.encoding
+#print(r.json())
+print("URL: ", r.url)
+print("Status Code: ", r.status_code)
+
+data = r.json()
+
+for item in data.get("results", []):
+    #print("Report Date:", item.get("report_date"))
+    print("Manufacturer Name:", item.get("term"))
+    print("Recall Count:", item.get("count"))
+    print()
