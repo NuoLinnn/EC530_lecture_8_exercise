@@ -11,7 +11,6 @@ print("Status Code: ", r.status_code)
 data = r.json()
 
 for item in data.get("results", []):
-    #print("Report Date:", item.get("report_date"))
     print("Manufacturer Name:", item.get("term"))
     print("Recall Count:", item.get("count"))
     print()
